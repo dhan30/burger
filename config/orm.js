@@ -5,7 +5,7 @@ var connection = require("./connection.js");
 var orm = {
 
 selectAll: function (a, b, c) {
-	var commandString = "SELECT * FROM burgers WHERE devoured";
+	var commandString = "SELECT * FROM burgers WHERE devoured = true";
 
 	connection.query(commandString, [a,b,c], function(err, results) {
 		console.log(results);
@@ -13,9 +13,13 @@ selectAll: function (a, b, c) {
 
 },
 
-insertOne: function () {
-	console.log("2");
-	
+insertOne: function (burger_name, devoured, date_devoured) {
+	// console.log("2");
+	var commandString = "UPDATE burgers SET id = 2 WHERE devoured = 0 ";
+	connection.query(commandString, [burger_name,devoured,date_devoured], function(err, results) {
+		console.log(results);
+	});
+
 },
 
 updateOne: function() {
@@ -24,8 +28,10 @@ updateOne: function() {
 
 };
 
-orm.updateOne();
-orm.selectAll();
+
+// orm.selectAll();
+orm.insertOne("veggieburger", true, 20170525);
+// orm.updateOne();
 
 
 module.exports = orm;
